@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sweet Cookies | Cookies Ubi</title>
+<meta name="description" content="Cookies berbahan dasar ubi. Pesan online, langsung lewat WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ubi:#5b2a86;--ubi-d:#3d1a5c;--krim:#fbf4e8;--gula:#e9a23b;--pink:#f3d6e4;--teks:#2a1a38;--abu:#7b6c88}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+:root{padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif;background:var(--krim);color:var(--teks);line-height:1.55}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;margin:0;line-height:1.1}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{background:var(--ubi-d);color:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+body::before{content:'';display:block;height:env(safe-area-inset-top,0px);background:var(--ubi-d);position:sticky;top:0;z-index:6;margin-bottom:calc(-1*env(safe-area-inset-top,0px))}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+header b{font-family:'Fraunces',serif;font-size:1.25rem}
+nav a{color:#fff;text-decoration:none;margin-left:18px;font-weight:500}
+.cartbtn{background:var(--gula);color:var(--ubi-d);border:0;border-radius:99px;padding:8px 16px;font-weight:700;cursor:pointer;font-family:inherit}
+.hero{background:linear-gradient(135deg,var(--ubi) 0%,var(--ubi-d) 100%);color:#fff;padding:72px 0 80px}
+.hero .wrap{display:flex;gap:32px;align-items:center;flex-wrap:wrap}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:800;max-width:11ch}
+.hero p{max-width:44ch;opacity:.92;font-size:1.1rem}
+.hero .big{font-size:9rem;line-height:1;filter:drop-shadow(0 12px 0 rgba(0,0,0,.15))}
+.cta{display:inline-block;background:var(--gula);color:var(--ubi-d);padding:13px 26px;border-radius:99px;font-weight:700;text-decoration:none;margin-top:8px}
+section{padding:56px 0}
+h2{font-size:2rem;color:var(--ubi-d);margin-bottom:6px}
+.sub{color:var(--abu);margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+.card{background:#fff;border-radius:18px;padding:20px;border:1px solid #eadff2;display:flex;flex-direction:column;gap:6px}
+.card .e{font-size:3rem}
+.card h3{font-size:1.2rem}
+.card p{margin:0;color:var(--abu);font-size:.92rem;flex:1}
+.card .h{font-weight:700;color:var(--ubi)}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:32px;height:32px;border-radius:50%;border:1px solid var(--ubi);background:#fff;color:var(--ubi);font-size:1.1rem;cursor:pointer}
+.qty span{min-width:24px;text-align:center;font-weight:700}
+.add{margin-top:6px;background:var(--ubi);color:#fff;border:0;border-radius:10px;padding:9px;font-weight:700;cursor:pointer;font-family:inherit}
+.info{display:flex;gap:16px;flex-wrap:wrap}
+.info div{flex:1 1 220px;background:var(--pink);border-radius:16px;padding:18px}
+.info b{display:block;color:var(--ubi-d)}
+#pesan{background:#fff}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+@media(max-width:760px){.cols{grid-template-columns:1fr}.hero .big{font-size:6rem}nav{display:none}}
+label{display:block;font-weight:700;margin:12px 0 4px;font-size:.92rem}
+input,textarea,select{width:100%;padding:11px 12px;border:1px solid #cdbbdc;border-radius:10px;font:inherit;background:#fff}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--ubi);border-color:var(--ubi)}
+.ring{background:var(--krim);border-radius:16px;padding:18px}
+.row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px dashed #d9c9e6}
+.row.t{font-weight:800;font-size:1.15rem;border:0;color:var(--ubi-d)}
+.kosong{color:var(--abu)}
+.kirim{width:100%;margin-top:16px;background:#1f9d55;color:#fff;border:0;border-radius:12px;padding:14px;font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit}
+.kirim:disabled{background:#b9b0c2;cursor:not-allowed}
+.err{color:#b3261e;font-size:.9rem;min-height:1.2em;margin-top:8px}
+.riwayat .row{flex-wrap:wrap}
+footer{background:var(--ubi-d);color:#d9c9e6;text-align:center;padding:28px 0;font-size:.92rem}
+</style>
+</head>
+<body>
+<header><div class="wrap"><b>🍠 Sweet Cookies</b>
+<nav><a href="#menu">Menu</a><a href="#pesan">Pesan</a><a href="#riwayat">Pesanan Saya</a></nav>
+<button class="cartbtn" onclick="location.hash='pesan'">🛒 <span id="jml">0</span> pcs</button></div></header>
+
+<div class="hero"><div class="wrap">
+<div style="flex:1 1 320px"><h1>Sweetness in every bite</h1>
+<p>Cookies lembut berbahan dasar ubi, dengan lima varian isian. Pilih, pesan, dan kami antar.</p>
+<a class="cta" href="#menu">Lihat Menu</a></div>
+<div class="big" aria-hidden="true">🍠🍪</div></div></div>
+
+<section id="menu"><div class="wrap">
+<h2>Menu</h2><p class="sub">Harga per pcs. Maksimal <span id="maks"></span> pcs per pesanan.</p>
+<div class="grid" id="grid"></div></div></section>
+
+<section><div class="wrap"><div class="info">
+<div><b>Ongkir Rp 10.000</b>Gratis ongkir untuk belanja mulai Rp 100.000.</div>
+<div><b>3 cara bayar</b>COD, transfer bank, atau e-wallet.</div>
+<div><b>Pesan lewat WhatsApp</b>Pesanan Anda terkirim langsung ke penjual.</div></div></div></section>
+
+<section id="pesan"><div class="wrap"><h2>Pesan Sekarang</h2><p class="sub">Lengkapi data, lalu kirim pesanan lewat WhatsApp.</p>
+<div class="cols">
+<div><div class="ring"><h3 style="margin-bottom:8px">Keranjang</h3><div id="isi"></div></div>
+<p id="infoBayar" class="sub" style="margin-top:14px"></p></div>
+<form id="form" novalidate>
+<label for="nama">Nama</label><input id="nama" autocomplete="name" required>
+<label for="tel">Nomor telepon</label><input id="tel" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx" required>
+<label for="alamat">Alamat lengkap</label><textarea id="alamat" rows="3" required></textarea>
+<label for="bayar">Pembayaran</label><select id="bayar"></select>
+<label for="cat">Catatan (opsional)</label><textarea id="cat" rows="2"></textarea>
+<div class="err" id="err" role="alert"></div>
+<button class="kirim" id="kirim" type="submit">Kirim Pesanan via WhatsApp</button>
+</form></div></div></section>
+
+<section id="riwayat"><div class="wrap riwayat"><h2>Pesanan Saya</h2>
+<p class="sub">Tersimpan di browser ini saja.</p><div id="rw"></div></div></section>
+
+<footer>© Sweet Cookies · Cookies Ubi</footer>
+
+<script>
+/* ====== PENGATURAN: ubah di sini ====== */
+const WA_NOMOR = "6281234567890";           // nomor WhatsApp penjual (format 62, tanpa +)
+const ONGKIR = 10000, GRATIS = 100000, MAKS = 100;
+const PRODUK = {
+  "Original":{h:12000,e:"🍪",d:"Cookies ubi rasa klasik yang lembut."},
+  "Chocolate":{h:14000,e:"🍫",d:"Cookies ubi dengan isian cokelat."},
+  "Cheese":{h:14000,e:"🧀",d:"Cookies ubi dengan isian keju gurih."},
+  "Matcha":{h:15000,e:"🍵",d:"Cookies ubi dengan isian matcha."},
+  "Taro":{h:15000,e:"💜",d:"Cookies ubi dengan isian taro lembut."}
+};
+const METODE = {
+  "COD / Bayar di tempat":"Siapkan uang pas saat kurir tiba.",
+  "Transfer bank":"Transfer ke BCA 1234567890 a.n. Sweet Cookies (contoh). Diproses setelah pembayaran diterima.",
+  "E-Wallet":"Kirim ke 0812-3456-7890 (GoPay/OVO/DANA, contoh) a.n. Sweet Cookies."
+};
+/* ====================================== */
+const $=id=>document.getElementById(id);
+const rp=n=>"Rp "+Math.round(n).toLocaleString("id-ID");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const keranjang={}; Object.keys(PRODUK).forEach(k=>keranjang[k]=0);
+const total=()=>Object.values(keranjang).reduce((a,b)=>a+b,0);
+const sub=()=>Object.entries(keranjang).reduce((a,[k,q])=>a+PRODUK[k].h*q,0);
+const ongkir=()=>sub()===0||sub()>=GRATIS?0:ONGKIR;
+$("maks").textContent=MAKS;
+
+function ubah(k,d){
+  const n=keranjang[k]+d;
+  if(n<0)return; if(total()+d>MAKS){$("err").textContent="Maksimal "+MAKS+" pcs per pesanan.";return}
+  $("err").textContent=""; keranjang[k]=n; render();
+}
+function render(){
+  $("grid").innerHTML=Object.entries(PRODUK).map(([k,p])=>`
+    <div class="card"><div class="e">${p.e}</div><h3>${k}</h3><p>${p.d}</p>
+    <div class="h">${rp(p.h)} / pcs</div>
+    <div class="qty"><button type="button" aria-label="Kurangi ${k}" data-k="${k}" data-d="-1">−</button>
+    <span>${keranjang[k]}</span><button type="button" aria-label="Tambah ${k}" data-k="${k}" data-d="1">+</button></div></div>`).join("");
+  $("jml").textContent=total();
+  const item=Object.entries(keranjang).filter(([,q])=>q>0);
+  $("isi").innerHTML=item.length?item.map(([k,q])=>`<div class="row"><span>${PRODUK[k].e} ${k} × ${q}</span><span>${rp(PRODUK[k].h*q)}</span></div>`).join("")+
+    `<div class="row"><span>Subtotal</span><span>${rp(sub())}</span></div>
+     <div class="row"><span>Ongkir</span><span>${ongkir()?rp(ongkir()):"Gratis"}</span></div>
+     <div class="row t"><span>Total</span><span>${rp(sub()+ongkir())}</span></div>`
+    :'<p class="kosong">Keranjang masih kosong. Pilih cookies di menu.</p>';
+  $("kirim").disabled=!item.length;
+}
+$("grid").addEventListener("click",e=>{const b=e.target.closest("button[data-k]");if(b)ubah(b.dataset.k,+b.dataset.d)});
+
+$("bayar").innerHTML=Object.keys(METODE).map(m=>`<option>${m}</option>`).join("");
+const infoBayar=()=>$("infoBayar").textContent=METODE[$("bayar").value];
+$("bayar").onchange=infoBayar; infoBayar();
+
+const KEY="sweetcookies_pesanan";
+const muat=()=>{try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}};
+function riwayat(){
+  const r=muat().slice().reverse();
+  $("rw").innerHTML=r.length?r.map(o=>`<div class="row"><b>${esc(o.no)}</b><span>${esc(o.tgl)}</span><span>${o.pcs} pcs</span><b>${rp(o.total)}</b></div>`).join("")
+   :'<p class="kosong">Belum ada pesanan dari browser ini.</p>';
+}
+
+$("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const nama=$("nama").value.trim(),tel=$("tel").value.replace(/[\s-]/g,""),al=$("alamat").value.trim();
+  if(!total()) return $("err").textContent="Pilih minimal 1 cookies.";
+  if(nama.length<2) return $("err").textContent="Nama wajib diisi.";
+  if(!/^(\+62|62|0)8\d{7,12}$/.test(tel)) return $("err").textContent="Nomor telepon tidak valid (contoh: 081234567890).";
+  if(al.length<10) return $("err").textContent="Alamat minimal 10 karakter.";
+  $("err").textContent="";
+  const now=new Date(), no="SC-"+now.toISOString().slice(2,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
+  const tot=sub()+ongkir();
+  const baris=Object.entries(keranjang).filter(([,q])=>q>0).map(([k,q])=>`- ${k} x ${q} = ${rp(PRODUK[k].h*q)}`).join("\n");
+  const pesan=`Halo Sweet Cookies, saya mau pesan:\n*No: ${no}*\n${baris}\nSubtotal: ${rp(sub())}\nOngkir: ${ongkir()?rp(ongkir()):"Gratis"}\n*Total: ${rp(tot)}*\n\nNama: ${nama}\nTelepon: ${tel}\nAlamat: ${al}\nPembayaran: ${$("bayar").value}\nCatatan: ${$("cat").value.trim()||"-"}`;
+  const r=muat(); r.push({no,tgl:now.toLocaleString("id-ID"),pcs:total(),total:tot});
+  try{localStorage.setItem(KEY,JSON.stringify(r))}catch(x){}
+  riwayat();
+  window.open("https://wa.me/"+WA_NOMOR+"?text="+encodeURIComponent(pesan),"_blank","noopener");
+  Object.keys(keranjang).forEach(k=>keranjang[k]=0); e.target.reset(); infoBayar(); render();
+});
+render(); riwayat();
+</script>
+</body>
+</html>
